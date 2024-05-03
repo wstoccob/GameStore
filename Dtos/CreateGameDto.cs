@@ -1,3 +1,8 @@
 ﻿namespace GameStore.Dtos;
 
-public record CreateGameDto();
+public record class CreateGameDto(
+    string Name,
+    string Genre,
+    decimal Price,
+    DateOnly ReleaseDate
+    );
