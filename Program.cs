@@ -30,7 +30,13 @@ List<GameDto> games = [
 app.MapGet("games", () => games);
 
 // GET /games/1
-app.MapGet("games/{id}", (int id) => games.Find(game => game.Id == id))
+app.MapGet("games/{id}", (int id) =>
+    {
+        var game = games.Find(game => game.Id == id);
+
+        return game is null ? Results.NotFound() : Results.Ok(game);
+
+    })
     .WithName(GetGameEndpointName);
 
 // POST /games
