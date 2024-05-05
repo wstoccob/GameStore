@@ -25,3 +25,7 @@ Content-Type: application/json
   "releaseDate": "1991-02-01"
 }
 
+###
+DELETE http://localhost:5116/games/2
+
+
