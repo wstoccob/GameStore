@@ -7,4 +7,13 @@
         <UserSecretsId>d73ade85-290f-436d-a270-e06505eebb22</UserSecretsId>
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.4">
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        <PrivateAssets>all</PrivateAssets>
+      </PackageReference>
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.4" />
+      <PackageReference Include="MinimalApis.Extensions" Version="0.11.0" />
+    </ItemGroup>
+
 </Project>

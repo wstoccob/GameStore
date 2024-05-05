@@ -8,20 +8,19 @@ POST http://localhost:5116/games
 Content-Type: application/json
 
 {
-  "name": "Minecraft",
   "genre": "Sandbox",
   "price": 19.99,
   "releaseDate": "2011-11-18"
 }
 
 ###
-PUT http://localhost:5116/games/3
+PUT http://localhost:5116/games/1
 Content-Type: application/json
 
 {
-  "name": "Street Fighter II Turbo",
+  "name": "Street Fighter II",
   "genre": "Fighting",
-  "price": 9.99,
+  "price": 19.99,
   "releaseDate": "1991-02-01"
 }
 
