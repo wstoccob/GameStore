@@ -15,14 +15,14 @@ Content-Type: application/json
 }
 
 ###
-PUT http://localhost:5116/games/1
+PUT http://localhost:5116/games/4
 Content-Type: application/json
 
 {
-  "name": "Street Fighter II",
-  "genre": "Fighting",
-  "price": 19.99,
-  "releaseDate": "1991-02-01"
+  "name": "Street Fighter II Turbo",
+  "genreId": "4",
+  "price": 69.99,
+  "releaseDate": "1992-02-01"
 }
 
 ###
