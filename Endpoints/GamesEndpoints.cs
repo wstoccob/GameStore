@@ -1,4 +1,7 @@
-﻿using GameStore.Dtos;
+﻿using GameStore.Data;
+using GameStore.Dtos;
+using GameStore.Entities;
+using GameStore.Mapping;
 
 namespace GameStore.Endpoints;
 
@@ -31,7 +34,7 @@ public static class GamesEndpoints
     {
         var group = app.MapGroup("games")
             .WithParameterValidation();
-        
+
         // GET /games
         group.MapGet("/", () => games);
 
@@ -46,17 +49,17 @@ public static class GamesEndpoints
             .WithName(GetGameEndpointName);
 
         // POST /games
-        group.MapPost("/", (CreateGameDto newGame) =>
+        group.MapPost("/", (CreateGameDto newGame, GameStoreContext dbContext) =>
         {
-            var game = new GameDto(
-                games.Count + 1,
-                newGame.Name,
-                newGame.Genre,
-                newGame.Price,
-                newGame.ReleaseDate);
-            games.Add(game);
+            Game game = newGame.ToEntity();
+            game.Genre = dbContext.Genres.Find(newGame.GenreId);
 
-            return Results.CreatedAtRoute(GetGameEndpointName, new { id = game.Id }, game);
+            dbContext.Games.Add(game);
+            dbContext.SaveChanges();
+
+            GameDto gameDto = game.ToDto();
+
+            return Results.CreatedAtRoute(GetGameEndpointName, new { id = game.Id }, gameDto);
         });
 
         // PUT /games
@@ -68,7 +71,7 @@ public static class GamesEndpoints
             {
                 return Results.NotFound();
             }
-    
+
             games[index] = new GameDto(
                 id,
                 updatedGame.Name,
@@ -80,10 +83,11 @@ public static class GamesEndpoints
         });
 
         // DELETE /games/1
-        group.MapDelete("/{id}", (int id) =>
+        group.MapDelete("/{id}", (int id, GameStoreContext dbContext) =>
         {
-            games.RemoveAll(game => game.Id == id);
-
+            Game? gameToRemove = dbContext.Games.Find(id);
+            dbContext.Games.Remove(gameToRemove);
+            dbContext.SaveChanges();
             return Results.NoContent();
         });
 

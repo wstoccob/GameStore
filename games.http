@@ -8,9 +8,10 @@ POST http://localhost:5116/games
 Content-Type: application/json
 
 {
-  "genre": "Sandbox",
-  "price": 19.99,
-  "releaseDate": "2011-11-18"
+  "name": "Free Fire",
+  "genreId": 2,
+  "price": 6.99,
+  "releaseDate": "2016-07-18"
 }
 
 ###
